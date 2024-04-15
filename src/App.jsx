@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
+  const [tasks, setTasks] = useState([
+   
+  ]);
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ const App = () => {
 
 
     const copyTasks = [...tasks];
-    copyTasks[i].completed = !tasks[i].completed;
+    copyTasks[i].completed = !tasks[i].completed; 
     setTasks(copyTasks);
 };
 
@@ -31,12 +34,15 @@ const App = () => {
     taskRender = tasks.map((task, index) => (
       <li className="flex items-center justify-between bg-gray-800 p-4 rounded-md mb-2" key={index}>
         <div className="flex items-center">
-                        <div
-                            onClick={(e) => CompleteTaskToggle(e, index)}
-                            className={`${
-                                task.completed ? "bg-green-500" : "border"
-                            }  rounded-full w-[30px] h-[30px]  border-orange-600`}
-                        ></div>
+        <div
+    onClick={(e) => CompleteTaskToggle(e, index)}
+    className={`${
+        task.completed ? "bg-green-500" : "border"
+    }  rounded-full w-[30px] h-[30px]  border-orange-600 flex items-center justify-center`}
+>
+    {task.completed ? <i className="ri-check-line text-white"></i> : null}
+</div>
+
                         <h1
                             className={`${
                                 task.completed && "line-through"
@@ -68,8 +74,6 @@ const App = () => {
             </div>
   <div className="relative w-2/4 h-3/4 bg-gray-300 rounded-lg shadow-lg flex flex-col items-center justify-center  p-6">
   <h1 className='text-5xl text-black px-4 py-2 bg-sky-600  absolute top-0 mt-10' >TASK ATLAS</h1>
-
-    
     <form onSubmit={submitHandler} className='flex space-x-2'>
       <input className="text-gray-900 rounded-md p-2 bg-gray-100 absolute top-24 mt-4 left-40" type="text" placeholder='Enter title' onChange={(e) => setTitle(e.target.value)} value={title} />
       <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 absolute top-28 left-50">ADD</button>
