@@ -7,6 +7,22 @@ const App = () => {
     { title: "Task2", completed: false },
   ]);
 
+
+  const DeleteHandler = (i) => {
+    const copyTasks = [...tasks];
+
+    let isValid = false;
+    if (!copyTasks[i].completed) {
+        isValid = confirm("Do you really Want to delete this Task ?");
+    }
+
+    if (isValid || copyTasks[i].completed) {
+        copyTasks.splice(i, 1);
+        setTasks(copyTasks);
+    }
+    // settasks(tasks.filter((task,index) => index !== i))
+};
+
   const submitHandler = (e) => {
     e.preventDefault();
     const newTask = { title, completed: false };
@@ -39,6 +55,10 @@ const App = () => {
         <div className="flex gap-3 text-2xl text-yellow-100">
           <i className="ri-file-edit-line"></i>
           <i className="ri-delete-bin-3-line"></i>
+          <i
+                            onClick={() => DeleteHandler(index)}
+                            className="ri-delete-bin-3-line"
+                        ></i>
         </div>
       </li>
     ));
